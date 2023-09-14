@@ -61,7 +61,7 @@ To use the Object Prediction API, make a POST request to the following endpoint:
 Here an example response:
 ```json
 {
-  "objects": ["sofa", "pen', "pencil"],
+  "objects": ["sofa", "pen", "pencil"],
   "probabilities": [0.932, 0.23, 0.53],
   "origins": [[256, 452],[112, 143], [622, 342]],
   "widths": [112, 100, 92],
