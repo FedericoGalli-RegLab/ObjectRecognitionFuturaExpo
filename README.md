@@ -21,7 +21,7 @@ Welcome to our API documentation, where we provide comprehensive information abo
   - [Response](#eresponse)
   - [JS Example](#ejs-example)
 
-- [Help/Bug Reporting](#help-bug-reporting)
+- [Help/Bug Reporting](#help/bug-reporting)
 
 ## Object Prediction API
 ### Overview
