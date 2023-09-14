@@ -27,6 +27,7 @@ The `apis/get_object_prediction` API allows you to perform advanced object predi
 
 ### Usage
 To use the Object Prediction API, make a POST request to the following endpoint: http://10.88.2.76:8000/apis/get_object_predictions
+
 **Please note, in order to access the APIs you need to be connected to the Regesta VPN**
 
 ### Request
