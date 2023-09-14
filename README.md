@@ -12,18 +12,18 @@ Welcome to our API documentation, where we provide comprehensive information abo
   - [Usage](#usage)
   - [Request](#request)
   - [Response](#response)
-  - [Example](#example)
+  - [Example](#jsexample)
 
 - [Emissions prediction](#emissions-text-api)
   - [Overview](#overview)
   - [Usage](#usage)
   - [Request](#request)
   - [Response](#response)
-  - [Example](#example)
+  - [Example](#jsexample)
 
 ## Object Prediction API
 ### Overview
-The `apis/get_object_prediction` API allows you to perform advanced object prediction on images. It utilizes a YOLO machine learning model to identify and annotate objects within an image, providing you with valuable insights such as prediction probability for each object and boundig box.
+The `/apis/get_object_prediction` API allows you to perform advanced object prediction on images. It utilizes a YOLO machine learning model to identify and annotate objects within an image, providing you with valuable insights such as prediction probability for each object and boundig box.
 
 ### Usage
 To use the Object Prediction API, make a POST request to the following endpoint: http://10.88.2.76:8000/apis/get_object_predictions
@@ -43,6 +43,7 @@ To use the Object Prediction API, make a POST request to the following endpoint:
   - origins: List of list of integers, boxes are represented via corners, x1, y1 being top left and x2, y2 being bottom right.
   - prediction_time: Integer, rapresenting the time to produce a prediction (not considering the internet latency)
   - triggered: Boolean, rapresenting if objects are being detected for the sufficent amount of time to be considered valid for the emissions prediction
+    
 ```json
 {
   "objects": "list(string)",
@@ -55,6 +56,7 @@ To use the Object Prediction API, make a POST request to the following endpoint:
 
 ### Response
 Here an example response:
+
 ```json
 {
   "objects": ["sofa", "pen", "pencil"],
@@ -65,13 +67,70 @@ Here an example response:
 }
 ```
 
-### Example
-Sample example in JavaScript, where the function paramenter data is your input JSON: 
+### JS Example
+Sample example in JavaScript, where the function paramenter **data** is your input JSON: 
+
 ```javascript
 # Sample request using fetch
 function postData(data) {
 
   fetch('http://10.88.2.76:8000/apis/get_object_prediction', {
+    method: 'POST',
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({
+      query: data,
+      description: '',
+    })
+  }).then((response) => response.json())
+    .then((json) => showResponse(json));
+  return;
+}
+```
+
+## Emissions Prediction API
+### Overview
+The `/apis/get_emissions_text` API allows you to call ChatGPT APIs and predict the carbon footprint of the specified objects.
+
+### Usage
+To use the Emissions Prediction API, make a POST request to the following endpoint: http://10.88.2.76:8000/apis/get_emissions_text
+
+**Please note, in order to access the APIs you need to be connected to the Regesta VPN**
+
+### Request
+- **Input**: The current request consist of a json file wich takes a simple string as input.
+```json
+{
+  "object": "string"
+}
+```
+- **Output**: A JSON response containing carbon emissions results.
+  - response: String, rapresenting the ChatGPT generated text.
+
+```json
+{
+  "response": "string"
+}
+```
+
+### Response
+Here an example response:
+
+```json
+{
+  "response": "The emission for a bottle is 10 Kg of CO2"
+}
+```
+
+### JS Example
+Sample example in JavaScript, where the function paramenter **data** is your input JSON: 
+
+```javascript
+# Sample request using fetch
+function postData(data) {
+
+  fetch('http://10.88.2.76:8000/apis/get_emissions_text', {
     method: 'POST',
     headers: {
       "Content-type": "application/json; charset=UTF-8"
