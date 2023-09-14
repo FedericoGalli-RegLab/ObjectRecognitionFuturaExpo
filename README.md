@@ -26,13 +26,9 @@ The `api/get_object_prediction` API allows you to perform advanced object predic
 ### Usage
 To use the Object Prediction API, make a POST request to the following endpoint:
 ### Request
-- **Input**: ```json
+```json
 {
-  "key1": "value1",
-  "key2": "value2",
-  "nestedObject": {
-    "nestedKey": "nestedValue"
-  }
+  "image": "string"
 }
 - **Output**: A JSON response containing object prediction results.
 
