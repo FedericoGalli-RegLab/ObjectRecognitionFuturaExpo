@@ -15,11 +15,11 @@ Welcome to our API documentation, where we provide comprehensive information abo
   - [JS Example](#js-example)
 
 - [Emissions prediction](#emissions-prediction-api)
-  - [Overview](#overview)
-  - [Usage](#usage)
-  - [Request](#request)
-  - [Response](#response)
-  - [JS Example](#js-example)
+  - [Overview](#eoverview)
+  - [Usage](#eusage)
+  - [Request](#erequest)
+  - [Response](#eresponse)
+  - [JS Example](#ejs-example)
 
 - [Help/Bug Reporting](#help)
 
