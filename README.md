@@ -21,7 +21,7 @@ Welcome to our API documentation, where we provide comprehensive information abo
   - [Response](#response)
   - [JS Example](#js-example)
 
-- [Help](#help)
+- [Help/Bug Reporting](#help)
 
 ## Object Prediction API
 ### Overview
@@ -147,7 +147,7 @@ function postData(data) {
 }
 ```
 
-## Help
+## Help/Bug Reporting
 If you need clarifications, having questions or problems of any kind just contact me on the Google Chat or via email **federico.galli@regestaitalia.it**
 
 Have fun 😉
