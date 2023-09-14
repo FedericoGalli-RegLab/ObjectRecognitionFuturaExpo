@@ -73,7 +73,7 @@ Here an example response:
 Sample example in JavaScript, where the function paramenter **data** is your input JSON: 
 
 ```javascript
-# Sample request using fetch
+//Sample request using fetch
 function postData(data) {
 
   fetch('http://10.88.2.76:8000/apis/get_object_prediction', {
@@ -129,7 +129,7 @@ Here an example response:
 Sample example in JavaScript, where the function paramenter **data** is your input JSON: 
 
 ```javascript
-# Sample request using fetch
+//Sample request using fetch
 function postData(data) {
 
   fetch('http://10.88.2.76:8000/apis/get_emissions_text', {
