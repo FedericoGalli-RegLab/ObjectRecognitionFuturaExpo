@@ -38,23 +38,38 @@ To use the Object Prediction API, make a POST request to the following endpoint:
 }
 ```
 - **Output**: A JSON response containing object prediction results.
+  - objects: List of string rapresenting the text of predicted object in the image.
+  - probabilities: List 
+  - origins: 
+  - widths: 
+  - heights: 
+  - prediction_time: 
+  - triggered: 
 ```json
 {
-  "objects": ['sofa', 'pen', 'pencil'],
+  "objects": "list(string)",
+  "probabilities": "list(float)",
+  "origins": "list(list(int))",
+  "widths": "list(int)",
+  "heights": "list(int)",
+  "prediction_time": "int",
+  "triggered": "bool"
+}
+```
+
+### Response
+Here an example response:
+```json
+{
+  "objects": ["sofa", "pen', "pencil"],
   "probabilities": [0.932, 0.23, 0.53],
   "origins": [[256, 452],[112, 143], [622, 342]],
   "widths": [112, 100, 92],
   "heights": [221, 64, 99],
-  "prediction_time": prediction_time,
-  "triggered": random.random() >= 0.8
-    }
+  "prediction_time": 1.912452,
+  "triggered": false
+}
 ```
-
-### Response
-The response will include a list of objects detected in the image, each with the following information:
-- Object label
-- Confidence score
-- Bounding box coordinates
 
 ### Example
 ```bash
