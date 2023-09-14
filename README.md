@@ -1,4 +1,4 @@
-﻿# FuturaExpo Object Recognition API Documentation
+﻿# 🗒️FuturaExpo Object Recognition API Documentation
 
 ## PLEASE NOTE 
 **The following APIs are currently in a dummy development state wich means the APIs DO NOT return any meaningfull result. We are defining the architecture to let the DEVs build up the main code structure.**
