@@ -12,14 +12,14 @@ Welcome to our API documentation, where we provide comprehensive information abo
   - [Usage](#usage)
   - [Request](#request)
   - [Response](#response)
-  - [Example](#jsexample)
+  - [JS Example](#jsexample)
 
 - [Emissions prediction](#emissions-text-api)
   - [Overview](#overview)
   - [Usage](#usage)
   - [Request](#request)
   - [Response](#response)
-  - [Example](#jsexample)
+  - [JS Example](#jsexample)
 
 ## Object Prediction API
 ### Overview
