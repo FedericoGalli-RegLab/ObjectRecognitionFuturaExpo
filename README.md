@@ -14,7 +14,7 @@ Welcome to our API documentation, where we provide comprehensive information abo
   - [Response](#response)
   - [JS Example](#js-example)
 
-- [Emissions prediction](#emission-prediction-api)
+- [Emissions prediction](#emissions-prediction-api)
   - [Overview](#overview)
   - [Usage](#usage)
   - [Request](#request)
