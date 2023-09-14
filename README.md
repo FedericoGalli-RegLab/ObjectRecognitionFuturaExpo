@@ -23,3 +23,17 @@ The `api/get_object_prediction` API allows you to perform advanced object predic
 
 ### Usage
 To use the Object Prediction API, make a POST request to the following endpoint:
+### Request
+- **Input**: An image file or URL.
+- **Output**: A JSON response containing object prediction results.
+
+### Response
+The response will include a list of objects detected in the image, each with the following information:
+- Object label
+- Confidence score
+- Bounding box coordinates
+
+### Example
+```bash
+# Sample request using cURL
+curl -X POST -F "image=@/path/to/your/image.jpg" https://api.example.com/api/get_object_prediction
