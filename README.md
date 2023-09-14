@@ -7,32 +7,32 @@
 Welcome to our API documentation, where we provide comprehensive information about our APIs. These APIs are designed to predict objects (lets suppose for now there could be a multiple object detedction, TBD if in future this is still possible) from an image and return a chat-gpt generated text telling the predicted objects emissions.
 
 ## Table of Contents
-- [Objects prediction](#object-prediction-api)
-  - [Overview](#overview)
-  - [Usage](#usage)
-  - [Request](#request)
-  - [Response](#response)
-  - [JS Example](#js-example)
+- [Objects prediction (OP)](#object-prediction-api)
+  - [Overview](#overview-op)
+  - [Usage](#usage-op)
+  - [Request](#request-op)
+  - [Response](#response-op)
+  - [JS Example](#js-example-op)
 
-- [Emissions prediction](#emissions-prediction-api)
-  - [Overview](#eoverview)
-  - [Usage](#eusage)
-  - [Request](#erequest)
-  - [Response](#eresponse)
-  - [JS Example](#ejs-example)
+- [Emissions prediction (EP)](#emissions-prediction-api)
+  - [Overview](#overview-ep)
+  - [Usage](#usage-ep)
+  - [Request](#request-ep)
+  - [Response](#response-ep)
+  - [JS Example](#js-example-ep)
 
 - [Contacts](#contacts)
 
 ## Object Prediction API
-### Overview
+### Overview OP
 The `/apis/get_object_prediction` API allows you to perform advanced object prediction on images. It utilizes a YOLO machine learning model to identify and annotate objects within an image, providing you with valuable insights such as prediction probability for each object and boundig box.
 
-### Usage
+### Usage OP
 To use the Object Prediction API, make a POST request to the following endpoint: http://10.88.2.76:8000/apis/get_object_predictions
 
 **Please note, in order to access the APIs you need to be connected to the Regesta VPN**
 
-### Request
+### Request OP
 - **Input**: The current request consist of a json file wich takes a simple string as input, **we need to discuss how to pass the image and the kind of format to use.**
 ```json
 {
@@ -56,7 +56,7 @@ To use the Object Prediction API, make a POST request to the following endpoint:
 }
 ```
 
-### Response
+### Response OP
 Here an example response:
 
 ```json
@@ -69,7 +69,7 @@ Here an example response:
 }
 ```
 
-### JS Example
+### JS Example OP
 Sample example in JavaScript, where the function paramenter **data** is your input JSON: 
 
 ```javascript
@@ -92,15 +92,15 @@ function postData(data) {
 ```
 
 ## Emissions Prediction API
-### Overview
+### Overview EP
 The `/apis/get_emissions_text` API allows you to call ChatGPT APIs and predict the carbon footprint of the specified objects.
 
-### Usage
+### Usage EP
 To use the Emissions Prediction API, make a POST request to the following endpoint: http://10.88.2.76:8000/apis/get_emissions_text
 
 **Please note, in order to access the APIs you need to be connected to the Regesta VPN**
 
-### Request
+### Request EP
 - **Input**: The current request consist of a json file wich takes a simple string as input.
 ```json
 {
@@ -116,7 +116,7 @@ To use the Emissions Prediction API, make a POST request to the following endpoi
 }
 ```
 
-### Response
+### Response EP
 Here an example response:
 
 ```json
@@ -125,7 +125,7 @@ Here an example response:
 }
 ```
 
-### JS Example
+### JS Example EP
 Sample example in JavaScript, where the function paramenter **data** is your input JSON: 
 
 ```javascript
