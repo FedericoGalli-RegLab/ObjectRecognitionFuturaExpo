@@ -26,10 +26,12 @@ The `api/get_object_prediction` API allows you to perform advanced object predic
 ### Usage
 To use the Object Prediction API, make a POST request to the following endpoint:
 ### Request
+- **Input**:
 ```json
 {
   "image": "string"
 }
+```
 - **Output**: A JSON response containing object prediction results.
 
 ### Response
