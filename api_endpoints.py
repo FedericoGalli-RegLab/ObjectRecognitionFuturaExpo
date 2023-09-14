@@ -32,13 +32,15 @@ app.mount("/api", StaticFiles(directory="api"), name="api")
 class ObjectRecognitionItem(BaseModel):
     image: str
 
-@app.post("/api/get_object_predictions")
+@app.post("/apis/get_object_predictions")
 async def request_predictions(item: ObjectRecognitionItem):
     
     prediction_time = dummy_method()
 
     response_json = {
         "objects": ['sofa', 'pen', 'pencil'],
+        "probabilities": [0.932, 0.23, 0.53],
+        "origins": [[256, 452, 356, 492],[112, 143, 224, 200], [622, 342, 740, 400]],
         "prediction_time": prediction_time,
         "triggered": random.random() >= 0.8
     }
@@ -46,9 +48,9 @@ async def request_predictions(item: ObjectRecognitionItem):
     return JSONResponse(response_json)
 
 class EmissionsTextItem(BaseModel):
-    objects: list
+    object: str
 
-@app.post("/api/get_emissions_text")
+@app.post("/apis/get_emissions_text")
 async def request_emissions(item: EmissionsTextItem):
     
     dummy_method()
