@@ -66,6 +66,22 @@ Here an example response:
 ```
 
 ### Example
-```bash
-# Sample request using cURL
-curl -X POST -F "image=@/path/to/your/image.jpg" https://api.example.com/api/get_object_prediction
+Sample example in JavaScript, where the function paramenter data is your input JSON: 
+```javascript
+# Sample request using fetch
+function postData(data) {
+
+  fetch('http://10.88.2.76:8000/apis/get_object_prediction', {
+    method: 'POST',
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({
+      query: data,
+      description: '',
+    })
+  }).then((response) => response.json())
+    .then((json) => showResponse(json));
+  return;
+}
+```
