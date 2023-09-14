@@ -70,7 +70,7 @@ Here an example response:
 ```
 
 ### JS Example OP
-Sample example in JavaScript, where the function paramenter **data** is your input JSON: 
+Sample example in JavaScript, where the function paramenter **data** is your request input: 
 
 ```javascript
 //Sample request using fetch
@@ -126,7 +126,7 @@ Here an example response:
 ```
 
 ### JS Example EP
-Sample example in JavaScript, where the function paramenter **data** is your input JSON: 
+Sample example in JavaScript, where the function paramenter **data** is your request input: 
 
 ```javascript
 //Sample request using fetch
