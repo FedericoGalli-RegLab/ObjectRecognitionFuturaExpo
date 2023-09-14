@@ -21,7 +21,7 @@ Welcome to our API documentation, where we provide comprehensive information abo
   - [Response](#eresponse)
   - [JS Example](#ejs-example)
 
-- [Contacts](#contacs)
+- [Contacts](#contacts)
 
 ## Object Prediction API
 ### Overview
@@ -148,6 +148,6 @@ function postData(data) {
 ```
 
 ## Contacts
-If you need clarifications, having questions or problems of any kind just contact me on the Google Chat or via email **federico.galli@regestaitalia.it**
+If you need clarifications, having questions, problems or bug of any kind just contact me on the Google Chat or via email **federico.galli@regestaitalia.it**
 
 Have fun 😉
