@@ -1,7 +1,9 @@
 ﻿# FuturaExpo Object Recognition API Documentation
 
-## PLEASE NOTE The following APIs are currently in a dummy development state wich means the APIs DO NOT return any meaningfull result. We are defining the architecture to let the DEVs build up the main code structure.
+## PLEASE NOTE 
+**The following APIs are currently in a dummy development state wich means the APIs DO NOT return any meaningfull result. We are defining the architecture to let the DEVs build up the main code structure.**
 
+## APIs Documentation
 Welcome to our API documentation, where we provide comprehensive information about our APIs. These APIs are designed to predict objects (lets suppose for now there could be a multiple object detedction, TBD if in future this is still possible) from an image and return a chat-gpt generated text telling the predicted objects emissions.
 
 ## Table of Contents
