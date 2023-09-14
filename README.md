@@ -70,10 +70,10 @@ Here an example response:
 ```
 
 ### JS Example OP
-Sample example in JavaScript, where the function paramenter **data** is your input JSON: 
+Sample example in JavaScript, where the function paramenter **data** is your request input: 
 
 ```javascript
-# Sample request using fetch
+//Sample request using fetch
 function postData(data) {
 
   fetch('http://10.88.2.76:8000/apis/get_object_prediction', {
@@ -126,10 +126,10 @@ Here an example response:
 ```
 
 ### JS Example EP
-Sample example in JavaScript, where the function paramenter **data** is your input JSON: 
+Sample example in JavaScript, where the function paramenter **data** is your request input: 
 
 ```javascript
-# Sample request using fetch
+//Sample request using fetch
 function postData(data) {
 
   fetch('http://10.88.2.76:8000/apis/get_emissions_text', {
