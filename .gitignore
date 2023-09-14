@@ -3,3 +3,5 @@ Videos/
 Images/
 api/
 *.pt
+__pycache__/api_endpoints.cpython-311.pyc
+__pycache__/
