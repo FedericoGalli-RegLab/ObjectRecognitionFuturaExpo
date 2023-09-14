@@ -32,8 +32,8 @@ app.mount("/api", StaticFiles(directory="api"), name="api")
 class ObjectRecognitionItem(BaseModel):
     image: str
 
-@app.post("/api/get_object_prediction")
-async def request_prediction(item: ObjectRecognitionItem):
+@app.post("/api/get_object_predictions")
+async def request_predictions(item: ObjectRecognitionItem):
     
     prediction_time = dummy_method()
 
@@ -46,10 +46,10 @@ async def request_prediction(item: ObjectRecognitionItem):
     return JSONResponse(response_json)
 
 class EmissionsTextItem(BaseModel):
-    object: str
+    objects: list
 
 @app.post("/api/get_emissions_text")
-async def request_prediction(item: EmissionsTextItem):
+async def request_emissions(item: EmissionsTextItem):
     
     dummy_method()
 
