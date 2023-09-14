@@ -3,14 +3,14 @@
 Welcome to our API documentation, where we provide comprehensive information about our APIs. These APIs are designed to predict objects (or just a single one) from an image and return a chat-gpt generated text telling the predicted objects emissions.
 
 ## Table of Contents
-- [Object Prediction API](#object-prediction-api)
+- [/api/get_object_predictions](#object-prediction-api)
   - [Overview](#overview)
   - [Usage](#usage)
   - [Request](#request)
   - [Response](#response)
   - [Example](#example)
 
-- [Emissions Text API](#emissions-text-api)
+- [/api/get_emissions_text](#emissions-text-api)
   - [Overview](#overview)
   - [Usage](#usage)
   - [Request](#request)
