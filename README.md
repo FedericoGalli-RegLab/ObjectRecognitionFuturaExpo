@@ -146,3 +146,8 @@ function postData(data) {
   return;
 }
 ```
+
+## Help
+If you need clarifications, having questions or problems of any kind just contact me on the Google Chat or via email **federico.galli@regestaitalia.it**
+
+Have fun 😉
