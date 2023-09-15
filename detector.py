@@ -7,13 +7,13 @@ import cv2
 class detector:
 
     model = None
-    cls_queue = None
-    prob_queue = None
+    cls_pred = None
+    prob_pred = None
 
     def __init__(self, model_name:str):
         
-        self.cls_queue = []
-        self.prob_queue = []
+        self.cls_pred = []
+        self.prob_pred = []
         self.model_name = model_name
         self.model = YOLO(model_name)  # pretrained YOLOv8m model best performance/inference_time tradeoff
 
@@ -30,27 +30,49 @@ class detector:
             objects.append(results[0].names[item])
 
         probabilities = results[0].boxes.conf.tolist()
-
-        if len(self.cls_queue) == 5:
+        print(objects)
+        
+        if len(self.cls_pred) == 3:
             triggered = self.trigger_logic()
         else:
-            self.cls_queue.append(objects)
-            self.prob_queue.append(probabilities)
-
+            self.cls_pred.append(objects)
+            self.prob_pred.append(probabilities)
+        
         response_string = {
         "objects": objects,
         "probabilities": probabilities,
         "origins": xyxy,
         "prediction_time": prediction_time,
-        "triggered": triggered
+        "triggered": True
         }
         return response_string
 
-    def trigger_logic(self):
+    def trigger_logic(self, test_list):
+
+        #flatten_list = self.flatten(self.cls_pred)
+        counter = 1
         
-        self.cls_queue = []
-        self.prob_queue = []
-    
+        return_object_list = []
+        found_pred = []
+        for i, item in enumerate(test_list):
+            for obj in item:
+                if obj not in found_pred:
+                    found_pred.append(obj)
+                    if i != 2:
+                        for entry in test_list[i+1:]:
+                            print(entry)
+                            for obj2 in entry:
+                                if obj2 == obj:
+                                    counter +=1
+                                print(str(obj) + " == " + str(obj2) + " " + str(obj2 == obj) + " " + str(counter))        
+                        if counter > 1:
+                            return_object_list.append(obj)
+                            counter = 1
+        print(found_pred)
+        self.cls_pred = []
+        self.prob_pred = []
+        return return_object_list
+
     def show_predicted_image(self, image_name):
         #Cropping the image to get just the center of the image
         img = cv2.imread(image_name)
@@ -64,4 +86,5 @@ class detector:
             im.save("Results/" + 'result.jpg')  # save image        
 
 test = detector('yolov8m.pt')
-test.show_predicted_image('Images/img3.jpg')
+#test.image_inference('Images/img3.jpg')
+print(test.trigger_logic([['a', 'b', 'f'], ['c', 'b'], ['d', 'e', 'u', 'f']]))
