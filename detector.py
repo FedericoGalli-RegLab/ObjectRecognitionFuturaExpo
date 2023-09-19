@@ -77,7 +77,7 @@ class detector:
         #Cropping the image to get just the center of the image
         img = cv2.imread(image_name)
 
-        results = self.model([img], verbose=False)
+        results = self.model([img], verbose=True)
         # Show the results
         for r in results:
             im_array = r.plot()  # plot a BGR numpy array of predictions
@@ -85,6 +85,6 @@ class detector:
             im.show() # show image
             im.save("Results/" + 'result.jpg')  # save image        
 
-test = detector('yolov8m.pt')
-#test.image_inference('Images/img3.jpg')
-print(test.trigger_logic([['a', 'b', 'f'], ['c', 'b'], ['d', 'e', 'u', 'f']]))
+#test = detector('yolov8m.pt')
+#test.show_predicted_image('Images/img3.jpg')
+#print(test.trigger_logic([['a', 'b', 'f'], ['c', 'b'], ['d', 'e', 'u', 'f']]))
