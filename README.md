@@ -116,7 +116,7 @@ To use the Emissions Prediction API, make a POST request to the following endpoi
 {
   "objects": "list(string)",
   "responses": "string",
-  "emissions_amount": "list(float)
+  "emissions_amount": "list(float)"
 }
 ```
 
