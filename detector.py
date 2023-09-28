@@ -1,52 +1,53 @@
+from calendar import c
+from http.client import TOO_MANY_REQUESTS
 import logging
 from tabnanny import verbose
 from ultralytics import YOLO
 from PIL import Image
 import cv2
 
-class detector:
+class Detector:
 
     model = None
     cls_pred = None
-    prob_pred = None
+    cls_prob = None
 
     def __init__(self, model_name:str):
         
         self.cls_pred = []
-        self.prob_pred = []
         self.model_name = model_name
         self.model = YOLO(model_name)  # pretrained YOLOv8m model best performance/inference_time tradeoff
 
     def image_inference(self, image):
 
         image = cv2.imread(image)
-        cropped_img = image[195: 395, 340: 940] # y, x
-        results = self.model([cropped_img], verbose=False)
-
-        prediction_time = results[0].speed['preprocess'] + results[0].speed['inference'] + results[0].speed['postprocess']
-        xyxy = results[0].boxes.xyxy.tolist()
         objects = []
-        for item in results[0].boxes.cls.tolist():
-            objects.append(results[0].names[item])
+        results = self.model([image], verbose=True)
+        for r in results:
+            
+            for item in results[0].boxes.cls.tolist():
+                objects.append(results[0].names[item])
+            prediction_time = results[0].speed['preprocess'] + results[0].speed['inference'] + results[0].speed['postprocess']
+            xyxy = results[0].boxes.xyxy.tolist()
 
-        probabilities = results[0].boxes.conf.tolist()
-        print(objects)
+        #print(xyxy)
+        #print(probabilities)
+        self.cls_pred.append(objects)
         
-        if len(self.cls_pred) == 3:
-            triggered = self.trigger_logic()
+        if len(self.cls_pred) == 2:
+            triggered = self.trigger_logic(self.cls_pred)
         else:
-            self.cls_pred.append(objects)
-            self.prob_pred.append(probabilities)
+            triggered = False
         
         response_string = {
         "objects": objects,
-        "probabilities": probabilities,
         "origins": xyxy,
         "prediction_time": prediction_time,
-        "triggered": True
+        "triggered": triggered
         }
         return response_string
 
+    '''
     def trigger_logic(self, test_list):
 
         #flatten_list = self.flatten(self.cls_pred)
@@ -70,8 +71,20 @@ class detector:
                             counter = 1
         print(found_pred)
         self.cls_pred = []
-        self.prob_pred = []
+        self.cls_prob = []
         return return_object_list
+    '''
+
+    def trigger_logic(self, test_list):
+        
+        concatanation_1 = "".join(sorted("".join(test_list[0])))
+        concatanation_2 = "".join(sorted("".join(test_list[1])))
+
+        if concatanation_1 == concatanation_2:
+            self.flush_images()
+        else:
+            self.shift_images()
+        return concatanation_1 == concatanation_2
 
     def show_predicted_image(self, image_name):
         #Cropping the image to get just the center of the image
@@ -80,11 +93,28 @@ class detector:
         results = self.model([img], verbose=True)
         # Show the results
         for r in results:
+            objects = []
+            for item in results[0].boxes.cls.tolist():
+                objects.append(results[0].names[item])
+            print(objects)
             im_array = r.plot()  # plot a BGR numpy array of predictions
             im = Image.fromarray(im_array[..., ::-1])  # RGB PIL image
             im.show() # show image
-            im.save("Results/" + 'result.jpg')  # save image        
+            im.save("Results/" + 'result.jpg')  # save image
+    
+    def flush_images(self):
+        self.cls_pred = []
+        self.cls_prob = []
 
-#test = detector('yolov8m.pt')
-#test.show_predicted_image('Images/img3.jpg')
-#print(test.trigger_logic([['a', 'b', 'f'], ['c', 'b'], ['d', 'e', 'u', 'f']]))
+    def shift_images(self):
+        self.cls_pred[0] = self.cls_pred[1]
+        self.cls_pred.pop()
+
+
+test = Detector('yolov8m.pt')
+
+print(test.image_inference("Images/img.jpg"))
+print(test.image_inference("Images/img3.jpg"))
+print(test.image_inference("Images/img3.jpg"))
+#test.show_predicted_image("Images/img3.jpg")
+

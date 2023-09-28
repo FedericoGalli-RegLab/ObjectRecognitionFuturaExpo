@@ -6,7 +6,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
 import random
-import detector
+import Detector
+
+inference_obj = Detector('yolov8m.pt')
 
 def dummy_method():
     random_time = random.uniform(0.4, 0.6)
@@ -49,7 +51,7 @@ async def request_predictions(item: ObjectRecognitionItem):
     return JSONResponse(response_json)
 
 class EmissionsTextItem(BaseModel):
-    object: str
+    objects: list = []
 
 @app.post("/apis/get_emissions_text")
 async def request_emissions(item: EmissionsTextItem):
@@ -57,7 +59,9 @@ async def request_emissions(item: EmissionsTextItem):
     dummy_method()
 
     response_json = {
-        "response": "The emission is 10 Kg of CO2"
+        "objects": item.objects,
+        "responses": ["The emission for a chaise lounge sofa is 100 Kg of CO2", "The emission for a ink pen 2 Kg of CO2", "The emission for a pencil is 5 Kg of CO2"],
+        "emission_amount": [100, 2, 5]
     }
     
     return JSONResponse(response_json)
