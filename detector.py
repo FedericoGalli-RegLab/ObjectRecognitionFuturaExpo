@@ -6,6 +6,89 @@ from ultralytics import YOLO
 from PIL import Image
 import cv2
 
+'''  0: person
+  1: bicycle
+  2: car
+  3: motorcycle
+  4: airplane
+  5: bus
+  6: train
+  7: truck
+  8: boat
+  9: traffic light
+  10: fire hydrant
+  11: stop sign
+  12: parking meter
+  13: bench
+  14: bird
+  15: cat
+  16: dog
+  17: horse
+  18: sheep
+  19: cow
+  20: elephant
+  21: bear
+  22: zebra
+  23: giraffe
+  24: backpack
+  25: umbrella
+  26: handbag
+  27: tie
+  28: suitcase
+  29: frisbee
+  30: skis
+  31: snowboard
+  32: sports ball
+  33: kite
+  34: baseball bat
+  35: baseball glove
+  36: skateboard
+  37: surfboard
+  38: tennis racket
+  39: bottle
+  40: wine glass
+  41: cup
+  42: fork
+  43: knife
+  44: spoon
+  45: bowl
+  46: banana
+  47: apple
+  48: sandwich
+  49: orange
+  50: broccoli
+  51: carrot
+  52: hot dog
+  53: pizza
+  54: donut
+  55: cake
+  56: chair
+  57: couch
+  58: potted plant
+  59: bed
+  60: dining table
+  61: toilet
+  62: tv
+  63: laptop
+  64: mouse
+  65: remote
+  66: keyboard
+  67: cell phone
+  68: microwave
+  69: oven
+  70: toaster
+  71: sink
+  72: refrigerator
+  73: book
+  74: clock
+  75: vase
+  76: scissors
+  77: teddy bear
+  78: hair drier
+  79: toothbrush
+  '''
+
+
 class Detector:
 
     model = None
@@ -22,69 +105,48 @@ class Detector:
 
         image = cv2.imread(image)
         objects = []
-        results = self.model([image], verbose=True)
-        for r in results:
-            
-            for item in results[0].boxes.cls.tolist():
-                objects.append(results[0].names[item])
-            prediction_time = results[0].speed['preprocess'] + results[0].speed['inference'] + results[0].speed['postprocess']
-            xyxy = results[0].boxes.xyxy.tolist()
+        results = self.model([image], verbose=False)
 
-        #print(xyxy)
-        #print(probabilities)
-        self.cls_pred.append(objects)
+        for item in results[0].boxes.cls.tolist():
+            objects.append(results[0].names[item])
+        prediction_time = results[0].speed['preprocess'] + results[0].speed['inference'] + results[0].speed['postprocess']
+        xyxy = results[0].boxes.xyxy.tolist()
         
+        self.person_remover(objects, xyxy)
+        self.cls_pred.append(objects)
+
         if len(self.cls_pred) == 2:
             triggered = self.trigger_logic(self.cls_pred)
         else:
             triggered = False
         
         response_string = {
-        "objects": objects,
+        "objects": {"EN_name": objects,
+                    "IT_name": objects
+                    },
         "origins": xyxy,
         "prediction_time": prediction_time,
         "triggered": triggered
         }
         return response_string
 
-    '''
-    def trigger_logic(self, test_list):
-
-        #flatten_list = self.flatten(self.cls_pred)
-        counter = 1
+    def person_remover(self, pred_list, xyxy_list):
         
-        return_object_list = []
-        found_pred = []
-        for i, item in enumerate(test_list):
-            for obj in item:
-                if obj not in found_pred:
-                    found_pred.append(obj)
-                    if i != 2:
-                        for entry in test_list[i+1:]:
-                            print(entry)
-                            for obj2 in entry:
-                                if obj2 == obj:
-                                    counter +=1
-                                print(str(obj) + " == " + str(obj2) + " " + str(obj2 == obj) + " " + str(counter))        
-                        if counter > 1:
-                            return_object_list.append(obj)
-                            counter = 1
-        print(found_pred)
-        self.cls_pred = []
-        self.cls_prob = []
-        return return_object_list
-    '''
+        for i, item in enumerate(pred_list):
+            if item == "person":
+                pred_list.pop(i)
+                xyxy_list.pop(i)
 
     def trigger_logic(self, test_list):
         
         concatanation_1 = "".join(sorted("".join(test_list[0])))
         concatanation_2 = "".join(sorted("".join(test_list[1])))
 
-        if concatanation_1 == concatanation_2:
+        if concatanation_1 == concatanation_2 and len(concatanation_1) > 0:
             self.flush_images()
         else:
             self.shift_images()
-        return concatanation_1 == concatanation_2
+        return (concatanation_1 == concatanation_2 and len(concatanation_1) > 0)
 
     def show_predicted_image(self, image_name):
         #Cropping the image to get just the center of the image
@@ -109,12 +171,3 @@ class Detector:
     def shift_images(self):
         self.cls_pred[0] = self.cls_pred[1]
         self.cls_pred.pop()
-
-
-test = Detector('yolov8m.pt')
-
-print(test.image_inference("Images/img.jpg"))
-print(test.image_inference("Images/img3.jpg"))
-print(test.image_inference("Images/img3.jpg"))
-#test.show_predicted_image("Images/img3.jpg")
-

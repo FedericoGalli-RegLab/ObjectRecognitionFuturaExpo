@@ -1,19 +1,12 @@
 from random import Random, random
-import time
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
-import random
 import Detector
 
-inference_obj = Detector('yolov8m.pt')
-
-def dummy_method():
-    random_time = random.uniform(0.4, 0.6)
-    time.sleep(random_time)
-    return random_time
+inference_obj = Detector.Detector('yolov8m.pt')
 
 origins = [
     "http://localhost",
@@ -32,31 +25,17 @@ app.add_middleware(
 app.mount("/api", StaticFiles(directory="api"), name="api")
 
 #POST RESPONSE API
-class ObjectRecognitionItem(BaseModel):
-    image: str
 
 @app.post("/apis/get_object_predictions")
-async def request_predictions(item: ObjectRecognitionItem):
+async def request_predictions(image: UploadFile):
     
-    prediction_time = dummy_method()
-
-    response_json = {
-        "objects": ['sofa', 'pen', 'pencil'],
-        "probabilities": [0.932, 0.23, 0.53],
-        "origins": [[256, 452, 356, 492],[112, 143, 224, 200], [622, 342, 740, 400]],
-        "prediction_time": prediction_time,
-        "triggered": random.random() >= 0.65
-    }
-    
-    return JSONResponse(response_json)
+    return JSONResponse(inference_obj.image_inference(image.file))
 
 class EmissionsTextItem(BaseModel):
     objects: list = []
 
 @app.post("/apis/get_emissions_text")
 async def request_emissions(item: EmissionsTextItem):
-    
-    dummy_method()
 
     response_json = {
         "objects": item.objects,
