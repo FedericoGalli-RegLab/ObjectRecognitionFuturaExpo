@@ -4,3 +4,4 @@ Images/
 api/
 __pycache__/
 *.pt
+api_gpt_key.json
