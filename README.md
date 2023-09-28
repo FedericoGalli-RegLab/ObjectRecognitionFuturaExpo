@@ -41,15 +41,18 @@ To use the Object Prediction API, make a POST request to the following endpoint:
 ```
 - **Output**: A JSON response containing object prediction results.
   - objects: List of string, rapresenting the text of predicted object in the image.
-  - probabilities: List of floats, rapresenting the prediction probability of each recognized object in the image.
+    - EN_name: English predicted objects labels.
+    - IT_name: Italian predicted objects labels.
   - origins: List of list of integers, boxes are represented via corners, x1, y1 being top left and x2, y2 being bottom right.
   - prediction_time: Integer, rapresenting the time to produce a prediction (not considering the internet latency)
   - triggered: Boolean, rapresenting if objects are being detected for the sufficent amount of time to be considered valid for the emissions prediction
     
 ```json
 {
-  "objects": "list(string)",
-  "probabilities": "list(float)",
+  "objects":{
+              "EN_name": "list(string)",
+              "IT_name" : "list(string)"
+            }
   "origins": "list(list(int))",
   "prediction_time": "int",
   "triggered": "bool"
@@ -61,8 +64,10 @@ Here an example response:
 
 ```json
 {
-  "objects": ["sofa", "pen", "pencil"],
-  "probabilities": [0.932, 0.23, 0.53],
+  "objects": {
+              "EN_name": ["sofa", "pen", "pencil"],
+              "IT_name": ["divano", "penna", "matita"]
+             }
   "origins": [[256, 452, 356, 492],[112, 143, 224, 200], [622, 342, 740, 400]],
   "prediction_time": 1.912452,
   "triggered": true
