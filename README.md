@@ -114,8 +114,7 @@ To use the Emissions Prediction API, make a POST request to the following endpoi
 ```
 - **Output**: A JSON response containing carbon emissions results.
   - objects: List of string, rapresenting the posted objects.
-  - responses: List of string, rapresenting the ChatGPT generated text for each object.
-  - emission_amount: List of float, rapresenting the ChatGPT generated emission number.
+  - emission_amount: List of float, rapresenting the ChatGPT generated emission number (Kg).
 
 ```json
 {
