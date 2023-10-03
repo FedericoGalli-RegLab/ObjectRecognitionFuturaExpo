@@ -138,11 +138,11 @@ class Detector:
         return response_string
 
     def person_remover(self, pred_list, xyxy_list):
-        
-        for i, item in enumerate(pred_list):
-            if item == "person":
-                pred_list.pop(i)
-                xyxy_list.pop(i)
+        n_person = pred_list.count("person")
+        for _ in range(n_person):
+            index = pred_list.index("person")
+            pred_list.pop(index)
+            xyxy_list.pop(index)
 
     def trigger_logic(self, test_list):
         
