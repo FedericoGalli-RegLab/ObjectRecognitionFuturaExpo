@@ -1,7 +1,4 @@
-from calendar import c
 from http.client import TOO_MANY_REQUESTS
-import logging
-from tabnanny import verbose
 from ultralytics import YOLO
 from PIL import Image
 import cv2
