@@ -30,7 +30,3 @@ class GPTService:
         )
 
         return (response['choices'][0]['message']['content'])
-
-test = GPTService()
-
-print(test)
