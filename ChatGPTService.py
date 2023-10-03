@@ -14,18 +14,17 @@ class GPTService:
         openai.api_key = os.getenv("OPENAI_API_KEY")
 
     def query_gpt(self, pred_object:str):
+        
         response = openai.ChatCompletion.create(
             model = "gpt-3.5-turbo",
             messages = [
-                        {"role": "user", "content": "Rispondi alla frase senza aggiungere ulteriori considerazioni e con un numero: {Quanti Kg di CO2 si emettono in atmosfera per produrre l'oggetto " + pred_object + "?}"}
+                        {"role": "user", "content": "Rispondi alla domanda utilizzando solo ed esclusivamente un singolo numero espresso in chilogrammi. Quanta CO2 si emette per produrre" + pred_object + " ? Non aggiungere altre informazioni oltre il numero e unità di misura"}
             ],
-            temperature = 0
+            temperature=0,
+            max_tokens=100,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0
         )
 
         return (response['choices'][0]['message']['content'])
-
-
-
-test = GPTService()
-
-print(test.query_gpt("Bottiglia in metallo"))
