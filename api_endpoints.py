@@ -42,7 +42,7 @@ async def request_emissions(item: EmissionsTextItem):
 
     responses = []
     kgs = []
-    for i, obj in enumerate(item):
+    for i, obj in enumerate(item.objects):
         responses.append(question_responser.query_gpt(obj))
         responses[i] = responses[i].lower()
         
@@ -57,12 +57,13 @@ async def request_emissions(item: EmissionsTextItem):
                         kgs.append(float(str_tmp) * 1000)
                     else:
                         kgs.append(float(str_tmp))
+
                     str_tmp = ""
+                    break
             except:
                 kgs.append(10)
                 str_tmp = ""
             
-
     response_json = {
         "objects": item.objects,
         "emissions_amount": kgs

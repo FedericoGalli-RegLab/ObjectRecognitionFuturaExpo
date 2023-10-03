@@ -178,8 +178,3 @@ class Detector:
     def shift_images(self):
         self.cls_pred[0] = self.cls_pred[1]
         self.cls_pred.pop()
-
-
-test = Detector("yolov8m.pt")
-
-print(test.image_inference("Images/img3.jpg"))
