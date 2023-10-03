@@ -104,7 +104,7 @@ class Detector:
 
         image = cv2.imread(image)
         objects = []
-        results = self.model([image], verbose=False)
+        results = self.model([image], verbose=False, device=0)
 
         for item in results[0].boxes.cls.tolist():
             objects.append(results[0].names[item])
