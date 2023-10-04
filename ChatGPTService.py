@@ -16,16 +16,23 @@ class GPTService:
     def query_gpt(self, pred_object:str):
         
         content = "Rispondi alla domanda utilizzando solo ed esclusivamente un singolo numero espresso in chilogrammi. Quanta CO2 si emette per produrre " + pred_object + " ? Non aggiungere altre informazioni oltre il numero e unità di misura"
+        content1 = "Give me the production carbon footprint in Kg of CO2 for the following object: " + pred_object + ". I want just a number as answer, do not add any further text"
+
         response = openai.ChatCompletion.create(
             model = "gpt-3.5-turbo",
             messages = [
                         {"role": "user", 
-                        "content": content}
+                        "content": content1}
             ],
             temperature=0,
-            max_tokens=100,
+            max_tokens=30,
             frequency_penalty=0,
             presence_penalty=0
         )
 
         return (response['choices'][0]['message']['content'])
+    
+
+test = GPTService()
+
+print(test.query_gpt("toothbrush"))

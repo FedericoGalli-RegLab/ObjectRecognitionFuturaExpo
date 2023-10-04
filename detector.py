@@ -37,7 +37,7 @@ classes = {
     "skis": "sci", 
     "snowboard": "snowboard", 
     "sports ball": "pallone da calcio",
-    "kite": "kite", 
+    "kite": "aquilone", 
     "baseball bat": "mazza da baseball", 
     "baseball glove": "guanti da baseball", 
     "skateboard": "skateboard",
@@ -67,11 +67,11 @@ classes = {
     "dining table": "tavolo da pranzo",
     "toilet": "bagno",
     "tv": "televisore",
-    "laptop": "laptop",
+    "laptop": "pc portatile",
     "mouse": "mouse",
     "remote": "remote",
     "keyboard": "tastiera",
-    "cell phone": "smartphone",
+    "cell phone": "cellulare",
     "microwave": "microonde",
     "oven": "forno",
     "toaster": "toaster",
@@ -82,7 +82,7 @@ classes = {
     "vase": "vaso",
     "scissors": "forbici",
     "teddy bear": "peluches",
-    "hair drier": "asciuga capelli",
+    "hair drier": "asciugacapelli",
     "toothbrush": "spazzolino da denti"
 
 }
