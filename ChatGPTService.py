@@ -51,14 +51,14 @@ emissions_dictionary = {
     "ciotola": 5,
     "banana": 0,
     "mela": 0,
-    "panino": 0.4,
+    "panino": 1,
     "arancia": 0,
     "broccoli": 0,
     "carota": 0,
-    "hot dog": 0.3,
-    "pizza": 1.3,
+    "hot dog": 1,
+    "pizza": 2,
     "ciambella": 1,
-    "torta": 1.4,
+    "torta": 2,
     "sedia": 40,
     "poltrona": 230,
     "pianta": 0,
@@ -67,9 +67,9 @@ emissions_dictionary = {
     "bagno": 70,
     "televisore": 112,
     "laptop": 331,
-    "mouse": 7.8,
+    "mouse": 8,
     "remote": 5,
-    "tastiera": 31.6,
+    "tastiera": 32,
     "smartphone": 63,
     "microonde": 300,
     "forno": 400,
@@ -82,7 +82,7 @@ emissions_dictionary = {
     "forbici": 70,
     "peluches": 40,
     "asciugacapelli": 200,
-    "spazzolino da denti": 25.6
+    "spazzolino da denti": 5
 
 
 }
@@ -101,14 +101,13 @@ class GPTService:
 
     def query_gpt(self, pred_object:str):
         
-        content = "Rispondi alla domanda utilizzando solo ed esclusivamente un singolo numero espresso in chilogrammi. Quanta CO2 si emette per produrre " + pred_object + " ? Non aggiungere altre informazioni oltre il numero e unità di misura"
-        content1 = "Give me the production carbon footprint in Kg of CO2 for the following object: " + pred_object + ". I want just a number as answer, do not add any further text"
+        content = "Utilizzando questo dizionario: " + str(emissions_dictionary) + ". Rispondi alla domanda: qual è il numro associato a " + pred_object + " ?"
 
         response = openai.ChatCompletion.create(
             model = "gpt-3.5-turbo",
             messages = [
                         {"role": "user", 
-                        "content": content1}
+                        "content": content}
             ],
             temperature=0,
             max_tokens=30,
@@ -117,3 +116,14 @@ class GPTService:
         )
 
         return (response['choices'][0]['message']['content'])
+    
+test = GPTService()
+print()
+
+str_temp = ""
+gpt_response = test.query_gpt("vaso")
+for i, char in enumerate(gpt_response):
+    if (ord(char) >=48 and ord(char) <= 57):
+        #if i != len(gpt_response) - 1:
+        str_temp += char
+print(int(str_temp))
