@@ -1,4 +1,3 @@
-from http.client import TOO_MANY_REQUESTS
 from ultralytics import YOLO
 from PIL import Image
 import cv2

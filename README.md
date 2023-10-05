@@ -101,12 +101,12 @@ function postData(data) {
 The `/apis/get_emissions_text` API allows you to call ChatGPT APIs and predict the carbon footprint of the specified objects.
 
 ### Usage EP
-To use the Emissions Prediction API, make a POST request to the following endpoint: http://10.88.2.76:8000/apis/get_emissions_text
+To use the Emissions Prediction API, make a POST request to the following endpoint: http://10.88.2.76:8000/apis/get_emissions_text. YOU MUST PASS TO THE REQUEST THE OBJECTS ENGLISH NAME, otherwise is not going to work.
 
 **Please note, in order to access the APIs you need to be connected to the Regesta VPN**
 
 ### Request EP
-- **Input**: The current request consist of a json file wich takes a simple string as input.
+- **Input**: The current request consist of a json file wich takes a simple string as input. YOU MUST PASS TO THE REQUEST THE OBJECTS ENGLISH NAME, otherwise is not going to work.
 ```json
 {
   "objects": "list(string)"

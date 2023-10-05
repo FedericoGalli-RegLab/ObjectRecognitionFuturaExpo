@@ -1,4 +1,3 @@
-from codecs import strict_errors
 from fastapi import FastAPI, UploadFile
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
@@ -7,8 +6,8 @@ from fastapi.responses import JSONResponse
 import Detector
 import ChatGPTService
 
-inference_obj = Detector.Detector('yolov8m.pt')
-question_responser = ChatGPTService.GPTService()
+inference_model = Detector.Detector('yolov8m.pt')
+question_responser = ChatGPTService.GPTService(use_gpt=False)
 
 origins = [
     "http://localhost",
@@ -31,31 +30,21 @@ app.mount("/api", StaticFiles(directory="api"), name="api")
 @app.post("/apis/get_object_predictions")
 async def request_predictions(image: UploadFile):
     
-    return JSONResponse(inference_obj.image_inference(image.file))
+    return JSONResponse(inference_model.image_inference(image.file))
 
 class EmissionsTextItem(BaseModel):
     objects: list = []
 
 @app.post("/apis/get_emissions_text")
 async def request_emissions(item: EmissionsTextItem):
-
     responses = []
-    kgs = []
 
-
-    for i, obj in enumerate(item.objects):
-        responses.append(question_responser.query_gpt(obj))
-        responses[i] = responses[i].lower()
-        
-        str_tmp = ""
-        for i, char in enumerate(responses[i]):
-            if (ord(char) >=48 and ord(char) <= 57):
-                str_temp += char
-        kgs.append(str_tmp)
+    for obj in item.objects:
+        responses.append(question_responser.query_no_gpt(obj))
             
     response_json = {
         "objects": item.objects,
-        "emissions_amount": kgs
+        "emissions_amount": responses
     }
     
     return JSONResponse(response_json)
